@@ -53,6 +53,6 @@ public class DefaultClientService implements ClientService {
 
   private boolean isValidServerAddress(String address) {
     address = address.toLowerCase();
-    return address.endsWith(".superawesome.dk");
+    return address.equals("superawesome.dk") || address.endsWith(".superawesome.dk");
   }
 }
