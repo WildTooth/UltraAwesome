@@ -4,6 +4,11 @@
       "enabled": {
         "name": "Enabled"
       }
+    },
+    "hudWidget": {
+      "balance": {
+        "name": "Balance"
+      }
     }
   }
 }
