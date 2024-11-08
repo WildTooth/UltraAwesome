@@ -8,6 +8,7 @@ import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.ClientPlayer;
 import net.labymod.api.client.network.server.ServerController;
 import net.labymod.api.models.Implements;
+import net.labymod.api.util.logging.Logging;
 import javax.inject.Singleton;
 import java.util.Objects;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @Singleton
 @Implements(ClientService.class)
 public class DefaultClientService implements ClientService {
+  private final Logging logger = Logging.create(ClientService.class);
 
   private ClientPlayer clientPlayer;
   private SuperAwesomeServer server;
@@ -38,6 +40,7 @@ public class DefaultClientService implements ClientService {
     } else if (this.server == null) {
       this.server = SuperAwesomeServer.NONE;
     }
+    this.logger.debug("Refreshed client service, found server {}", this.server);
   }
 
   public void setServer(SuperAwesomeServer server) {

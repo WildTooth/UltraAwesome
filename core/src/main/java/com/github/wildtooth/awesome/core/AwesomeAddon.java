@@ -4,7 +4,9 @@ import com.github.wildtooth.awesome.api.Awesome;
 import com.github.wildtooth.awesome.core.util.Listeners;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import javax.inject.Singleton;
 
+@Singleton
 @AddonMain
 public class AwesomeAddon extends LabyAddon<AwesomeConfiguration> {
 
@@ -28,7 +30,7 @@ public class AwesomeAddon extends LabyAddon<AwesomeConfiguration> {
     return AwesomeConfiguration.class;
   }
 
-  public Listeners listeners() {
+  public Listeners getListeners() {
     return this.listeners;
   }
 }

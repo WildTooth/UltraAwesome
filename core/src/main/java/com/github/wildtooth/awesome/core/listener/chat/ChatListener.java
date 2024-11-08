@@ -4,8 +4,11 @@ import com.github.wildtooth.awesome.core.listener.Listener;
 import net.labymod.api.event.EventBus;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.chat.ChatReceiveEvent;
+import net.labymod.api.util.logging.Logging;
 
 public class ChatListener implements Listener {
+
+  private final Logging logger = Logging.create(ChatListener.class);
 
   private final EventBus eventBus;
   private final ChatVariables chatVariables;
@@ -26,6 +29,7 @@ public class ChatListener implements Listener {
     if (variableValue.isEmpty()) {
       return;
     }
+    this.logger.debug("Setting variable {} to value {}", variable, variableValue);
     this.chatVariables.setVariable(variable, variableValue);
   }
 
@@ -39,11 +43,13 @@ public class ChatListener implements Listener {
 
   @Override
   public void enable() {
+    this.logger.info("Enabling ChatListener");
     this.eventBus.registerListener(this);
   }
 
   @Override
   public void disable() {
+    this.logger.info("Disabling ChatListener");
     this.eventBus.unregisterListener(this);
   }
 }

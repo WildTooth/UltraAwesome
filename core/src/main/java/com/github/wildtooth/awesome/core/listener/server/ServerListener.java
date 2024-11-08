@@ -11,8 +11,11 @@ import net.labymod.api.event.client.network.server.ServerDisconnectEvent;
 import net.labymod.api.event.client.network.server.ServerJoinEvent;
 import net.labymod.api.event.client.network.server.ServerSwitchEvent;
 import net.labymod.api.event.client.network.server.SubServerSwitchEvent;
+import net.labymod.api.util.logging.Logging;
 
 public class ServerListener implements Listener {
+
+  private final Logging logger = Logging.create(ServerListener.class);
 
   private final EventBus eventBus;
   private final ClientService clientService;
@@ -54,21 +57,26 @@ public class ServerListener implements Listener {
     if (isJoin) {
       DefaultClientService clientService = (DefaultClientService) this.clientService;
       clientService.setServer(SuperAwesomeServer.LIMBO);
+      this.logger.debug("Setting server to Limbo");
       return;
     }
+    this.logger.debug("Refreshing client service");
     this.clientService.refresh();
     if (isRelevantServer(this.clientService.getServer())) {
+      this.logger.debug("Refreshing Awesome");
       Awesome.refresh();
     }
   }
 
   @Override
   public void enable() {
+    this.logger.info("Enabling ServerListener");
     this.eventBus.registerListener(this);
   }
 
   @Override
   public void disable() {
+    this.logger.info("Disabling ServerListener");
     this.eventBus.unregisterListener(this);
   }
 }
